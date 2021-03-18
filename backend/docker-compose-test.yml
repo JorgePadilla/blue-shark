@@ -1,0 +1,40 @@
+version: '3.7'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    image: express-ts:test
+    ports:
+      - 3000:3000
+    networks:
+      - webnet
+    depends_on:
+      - postgres
+    restart: always
+    environment:
+      - DB_HOST=postgres
+      - DB_USERNAME=test
+      - DB_PASSWORD=test
+      - DB_NAME=test
+      - DB_SYNC=true
+
+  postgres:
+    image: postgres:11.3-alpine
+    ports:
+      - 5432:5432
+    networks:
+      - webnet
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test
+      - POSTGRES_DB=test
+
+networks:
+  webnet:
+
+volumes:
+  pg_data:
+    driver: local
