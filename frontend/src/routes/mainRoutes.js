@@ -39,7 +39,24 @@ const mainRoutes = [
     name: 'Pacientes',
     icon: <UserOutlined />,
     component: Paciente,
-    sub: [{ name: 'Ingresar', icon: <UserAddOutlined /> }, { name: 'Editar', icon: <EditOutlined /> }],
+    sub: [
+      {
+        path: '/paciente/ingresar',
+        name: 'Ingresar',
+        icon: <UserAddOutlined />,
+        component: SignIn,
+        auth: true,
+        permission: 'admin',
+      },
+      {
+        path: '/paciente/editar',
+        name: 'Editar',
+        icon: <EditOutlined />,
+        component: SignIn,
+        auth: true,
+        permission: 'admin',
+      },
+    ],
   },
   {
     path: '/agenda',
