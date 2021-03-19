@@ -10,12 +10,14 @@ import {
   BarChartOutlined,
   CalendarOutlined,
   CloseCircleOutlined,
-  ForkOutlined,
   HomeOutlined,
   LoginOutlined,
   UserOutlined,
   UserAddOutlined,
   EditOutlined,
+  MedicineBoxOutlined,
+  DollarOutlined,
+  SettingOutlined
 } from '@ant-design/icons';
 
 const mainRoutes = [
@@ -39,6 +41,8 @@ const mainRoutes = [
     name: 'Pacientes',
     icon: <UserOutlined />,
     component: Paciente,
+    auth: true,
+    permission: 'admin',
     sub: [
       {
         path: '/paciente/ingresar',
@@ -63,24 +67,48 @@ const mainRoutes = [
     name: 'Agenda',
     icon: <CalendarOutlined />,
     component: Agenda,
+    auth: true,
+    permission: 'admin',
+  },
+  {
+    path: '/consulta',
+    name: 'Consulta',
+    icon: <MedicineBoxOutlined />,
+    component: Agenda,
+    auth: true,
+    permission: 'admin',
   },
   {
     path: '/factura',
     name: 'Facturación',
-    icon: <ForkOutlined />,
+    icon: <DollarOutlined />,
     component: Factura,
+    auth: true,
+    permission: 'admin',
   },
   {
     path: '/reporte',
     name: 'Reportes',
     icon: <BarChartOutlined />,
     component: Reporte,
+    auth: true,
+    permission: 'admin',
+  },
+  {
+    path: '/configuracion',
+    name: 'Configuracion',
+    icon: <SettingOutlined />,
+    component: Reporte,
+    auth: true,
+    permission: 'admin',
   },
   {
     path: '',
     name: 'Not Found',
     icon: <CloseCircleOutlined />,
     component: NotFound,
+    auth: true,
+    permission: 'admin',
   },
 ];
 
