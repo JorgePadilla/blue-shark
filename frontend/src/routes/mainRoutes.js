@@ -1,15 +1,29 @@
+import React from 'react';
 import Board from 'containers/Board';
 import SignIn from 'containers/SignIn';
 import NotFound from 'containers/NotFound';
 import Agenda from 'containers/Agenda';
 import Paciente from 'containers/Paciente';
+import Factura from 'containers/Factura';
+import Reporte from 'containers/Reporte';
+import {
+  BarChartOutlined,
+  CalendarOutlined,
+  CloseCircleOutlined,
+  ForkOutlined,
+  HomeOutlined,
+  LoginOutlined,
+  UserOutlined,
+  UserAddOutlined,
+  EditOutlined,
+} from '@ant-design/icons';
 
 const mainRoutes = [
   {
     exact: true,
     path: '/',
     name: 'Home',
-    icon: 'home',
+    icon: <HomeOutlined />,
     component: Board,
     auth: true,
     permission: 'admin',
@@ -17,37 +31,38 @@ const mainRoutes = [
   {
     path: '/signin',
     name: 'Sign In',
-    icon: 'login',
+    icon: <LoginOutlined />,
     component: SignIn,
   },
   {
     path: '/paciente',
     name: 'Pacientes',
-    icon: 'user',
+    icon: <UserOutlined />,
     component: Paciente,
+    sub: [{ name: 'Ingresar', icon: <UserAddOutlined /> }, { name: 'Editar', icon: <EditOutlined /> }],
   },
   {
     path: '/agenda',
     name: 'Agenda',
-    icon: 'calendar',
+    icon: <CalendarOutlined />,
     component: Agenda,
   },
   {
-    path: '/paciente',
+    path: '/factura',
     name: 'Facturación',
-    icon: 'form',
-    component: SignIn,
+    icon: <ForkOutlined />,
+    component: Factura,
   },
   {
-    path: '/paciente',
+    path: '/reporte',
     name: 'Reportes',
-    icon: 'bar-chart',
-    component: SignIn,
+    icon: <BarChartOutlined />,
+    component: Reporte,
   },
   {
     path: '',
     name: 'Not Found',
-    icon: 'close-circle',
+    icon: <CloseCircleOutlined />,
     component: NotFound,
   },
 ];
