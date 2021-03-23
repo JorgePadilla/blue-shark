@@ -16,7 +16,7 @@ function Sider(props) {
   return (
     <Layout.Sider>
       <Menu key="main" theme="dark" selectedKeys={[props.location.pathname]} mode="inline">
-        {mainRoutes.map((route, index) =>
+        {mainRoutes.map(route =>
           !route.auth ||
           (!route.permission && props.user) ||
           (props.user && props.user.permissions.includes(route.permission)) ? (
@@ -28,7 +28,7 @@ function Sider(props) {
               </Menu.Item>
             ) : (
               <SubMenu key={route.path} icon={route.icon} title={route.name}>
-                {route.sub.map((sub, index) => (
+                {route.sub.map(sub => (
                   <Menu.Item icon={sub.icon} key={sub.path}>
                     <Link key={sub.path} to={sub.path || '/notfound'}>
                       <span>{sub.name}</span>

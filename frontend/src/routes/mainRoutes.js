@@ -17,7 +17,8 @@ import {
   EditOutlined,
   MedicineBoxOutlined,
   DollarOutlined,
-  SettingOutlined
+  SettingOutlined,
+  FolderOutlined,
 } from '@ant-design/icons';
 
 const mainRoutes = [
@@ -71,9 +72,17 @@ const mainRoutes = [
     permission: 'admin',
   },
   {
+    path: '/expediente',
+    name: 'Expediente',
+    icon: <MedicineBoxOutlined />,
+    component: Agenda,
+    auth: true,
+    permission: 'admin',
+  },
+  {
     path: '/consulta',
     name: 'Consulta',
-    icon: <MedicineBoxOutlined />,
+    icon: <FolderOutlined />,
     component: Agenda,
     auth: true,
     permission: 'admin',
