@@ -7,6 +7,7 @@ import Header from 'components/Header';
 import Sider from 'components/Sider';
 import PrivateRoute from 'components/PrivateRoute';
 import mainRoutes from 'routes/mainRoutes';
+import RouteWithSubRoutes from 'utils/routeWithSubRoutes';
 
 export default function App() {
   return (
@@ -22,7 +23,9 @@ export default function App() {
         <Sider />
         <Layout>
           <Layout.Content style={{ margin: '16px' }}>
-            <Switch>{mainRoutes.map(route => (route.auth ? <PrivateRoute {...route} /> : <Route {...route} />))}</Switch>
+            <Switch>
+              {mainRoutes.map(route => (route.auth ? <PrivateRoute {...route} /> : <Route {...route} />))}        
+            </Switch>
           </Layout.Content>
           <Layout.Footer style={{ textAlign: 'center' }}>Create React Ant Design Boilerplate</Layout.Footer>
         </Layout>

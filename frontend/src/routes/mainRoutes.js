@@ -20,6 +20,7 @@ import {
   SettingOutlined,
   FolderOutlined,
 } from '@ant-design/icons';
+import IngresarPaciente from 'containers/Paciente/Ingresar';
 
 const mainRoutes = [
   {
@@ -38,18 +39,19 @@ const mainRoutes = [
     component: SignIn,
   },
   {
+    exact: true,
     path: '/paciente',
     name: 'Pacientes',
     icon: <UserOutlined />,
     component: Paciente,
     auth: true,
     permission: 'admin',
-    sub: [
+    children: [
       {
         path: '/paciente/ingresar',
         name: 'Ingresar',
         icon: <UserAddOutlined />,
-        component: SignIn,
+        component: IngresarPaciente,
         auth: true,
         permission: 'admin',
       },
@@ -62,6 +64,24 @@ const mainRoutes = [
         permission: 'admin',
       },
     ],
+  },
+  {
+    path: '/paciente/ingresar',
+    name: 'Ingresar',
+    icon: <UserAddOutlined />,
+    component: IngresarPaciente,
+    auth: true,
+    permission: 'admin',
+    hideOnMenu: true
+  },
+  {
+    path: '/paciente/editar',
+    name: 'Editar',
+    icon: <EditOutlined />,
+    component: SignIn,
+    auth: true,
+    permission: 'admin',
+    hideOnMenu: true
   },
   {
     path: '/agenda',
