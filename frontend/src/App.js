@@ -7,7 +7,6 @@ import Header from 'components/Header';
 import Sider from 'components/Sider';
 import PrivateRoute from 'components/PrivateRoute';
 import mainRoutes from 'routes/mainRoutes';
-import RouteWithSubRoutes from 'utils/routeWithSubRoutes';
 
 export default function App() {
   return (
