@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useState, useMemo }  from 'react';
+import Select from 'react-select';
 import { Form, Input, Radio } from 'antd';
 import { DatePicker } from 'antd';
+import countryList from 'react-select-country-list';
 
 const DatosGenerales = () => {
   function onChange(e) {
     console.log(`radio checked:${e.target.value}`);
   }
+  function CountrySelector() {
+    const [value, setValue] = useState('')
+    const options = useMemo(() => countryList().getData(), [])
+  
+    const changeHandler = value => {
+      setValue(value)
+    }
+  
+    return <Select options={options} value={value} onChange={changeHandler} />
+  }
+  
   return (
     <>
       <Form.Item label="Datos Generales"></Form.Item>
@@ -32,6 +45,12 @@ const DatosGenerales = () => {
       </Form.Item>
       <Form.Item label="Fecha de nacimiento">
         <DatePicker onChange={onChange} />
+      </Form.Item>
+      <Form.Item label="Numero de identidad">
+        <Input placeholder="Numero de identidad" />
+      </Form.Item>
+      <Form.Item label="Nacionalidad">
+      <CountrySelector/>
       </Form.Item>
     </>
   );

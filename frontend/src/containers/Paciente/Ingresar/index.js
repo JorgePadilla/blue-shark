@@ -82,11 +82,11 @@ const IngresarPaciente = () => {
         <Input />
       </Form.Item>
 
+      <Form.Item label="Acepta notificaciones por email">
+        <Switch defaultChecked onChange={onSwitchChange} />
+      </Form.Item>
       <Form.Item {...buttonItemLayout}>
         <Button type="primary">Enviar</Button>
-      </Form.Item>
-      <Form.Item label="Es mayor de 18 años">
-        <Switch defaultChecked onChange={onSwitchChange} />
       </Form.Item>
     </Form>
   );
