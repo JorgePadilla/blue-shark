@@ -9,6 +9,7 @@ export const pacienteGetAllValidator = celebrate({
 
 export const pacientePostValidator = celebrate({
     body:{
-        
+        primerNombre: Joi.string().max(50).required(),
+        segundoNombre: Joi.string().required()
     }
 })

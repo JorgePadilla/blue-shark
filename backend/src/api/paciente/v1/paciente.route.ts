@@ -1,6 +1,6 @@
 import { pacienteGetAllValidator, pacientePostValidator } from "api/paciente/v1/paciente.validator";
-import { pacienteGetAllHandler } from "./v1/handler/paciente.getAll";
-import { pacientePostHandler } from "./v1/handler/paciente.post";
+import { pacienteGetAllHandler } from "./handler/paciente.getAll";
+import { pacientePostHandler } from "./handler/paciente.post";
 
 export const routes: CommonRoute[] = [
  {
@@ -11,7 +11,7 @@ export const routes: CommonRoute[] = [
     handler: pacienteGetAllHandler,   
  },
  {
-    path: '/pacientes',
+    path: '/paciente',
     method: 'post',
     permission: ['admin'],
     validator: pacientePostValidator,

@@ -13,7 +13,7 @@ export async function pacienteGetAllHandler(req: Request, res: Response, next: N
     const pacienteList = await getConnection()
     .createQueryBuilder()
     .select('paciente')
-    .from(Paciente, 'post')
+    .from(Paciente, 'paciente')
     .orderBy('id', 'DESC')
     .skip(query.offset)
     .take(query.limit)
