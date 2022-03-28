@@ -16,22 +16,27 @@ function Sider(props) {
   return (
     <Layout.Sider>
       <Menu key="main" theme="dark" selectedKeys={[props.location.pathname]} mode="inline">
-        {mainRoutes.map((route, index) =>
+        {mainRoutes.map(route =>
+          !route.showOnMenu ||
           !route.auth ||
           (!route.permission && props.user) ||
           (props.user && props.user.permissions.includes(route.permission)) ? (
-            !route.sub ? (
-              <Menu.Item key={route.path || '/notfound'} icon={route.icon}>
-                <Link key={route.path} to={route.path || '/notfound'}>
-                  <span>{route.name}</span>
-                </Link>
-              </Menu.Item>
+            !route.children ? (
+              !route.hideOnMenu ? (
+                <Menu.Item key={route.path || '/notfound'} icon={route.icon}>
+                  <Link key={route.path} to={route.path || '/notfound'}>
+                    <span>{route.name}</span>
+                  </Link>
+                </Menu.Item>
+              ) : (
+                <React.Fragment />
+              )
             ) : (
               <SubMenu key={route.path} icon={route.icon} title={route.name}>
-                {route.sub.map((sub, index) => (
-                  <Menu.Item icon={sub.icon} key={sub.path}>
-                    <Link key={sub.path} to={sub.path || '/notfound'}>
-                      <span>{sub.name}</span>
+                {route.children.map(child => (
+                  <Menu.Item icon={child.icon} key={child.path}>
+                    <Link key={child.path} to={child.path || '/notfound'}>
+                      <span>{child.name}</span>
                     </Link>
                   </Menu.Item>
                 ))}

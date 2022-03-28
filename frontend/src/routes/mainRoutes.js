@@ -17,8 +17,10 @@ import {
   EditOutlined,
   MedicineBoxOutlined,
   DollarOutlined,
-  SettingOutlined
+  SettingOutlined,
+  FolderOutlined,
 } from '@ant-design/icons';
+import IngresarPaciente from 'containers/Paciente/Ingresar';
 
 const mainRoutes = [
   {
@@ -37,18 +39,19 @@ const mainRoutes = [
     component: SignIn,
   },
   {
+    exact: true,
     path: '/paciente',
     name: 'Pacientes',
     icon: <UserOutlined />,
     component: Paciente,
     auth: true,
     permission: 'admin',
-    sub: [
+    children: [
       {
         path: '/paciente/ingresar',
         name: 'Ingresar',
         icon: <UserAddOutlined />,
-        component: SignIn,
+        component: IngresarPaciente,
         auth: true,
         permission: 'admin',
       },
@@ -63,6 +66,24 @@ const mainRoutes = [
     ],
   },
   {
+    path: '/paciente/ingresar',
+    name: 'Ingresar',
+    icon: <UserAddOutlined />,
+    component: IngresarPaciente,
+    auth: true,
+    permission: 'admin',
+    hideOnMenu: true
+  },
+  {
+    path: '/paciente/editar',
+    name: 'Editar',
+    icon: <EditOutlined />,
+    component: SignIn,
+    auth: true,
+    permission: 'admin',
+    hideOnMenu: true
+  },
+  {
     path: '/agenda',
     name: 'Agenda',
     icon: <CalendarOutlined />,
@@ -71,9 +92,17 @@ const mainRoutes = [
     permission: 'admin',
   },
   {
+    path: '/expediente',
+    name: 'Expediente',
+    icon: <MedicineBoxOutlined />,
+    component: Agenda,
+    auth: true,
+    permission: 'admin',
+  },
+  {
     path: '/consulta',
     name: 'Consulta',
-    icon: <MedicineBoxOutlined />,
+    icon: <FolderOutlined />,
     component: Agenda,
     auth: true,
     permission: 'admin',
