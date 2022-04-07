@@ -1,11 +1,24 @@
-import React, { useState } from 'react';
-import { Form, Input, Button, Radio, Switch } from 'antd';
+import React, { memo, useState } from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { Form, Input, Button, Switch } from 'antd';
 import CountryPhoneInput from 'antd-country-phone-input';
 import 'antd-country-phone-input/dist/index.css';
 import DatosGenerales from './datosGenerales';
+import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectReducer } from 'utils/injectReducer';
+import { createStructuredSelector } from 'reselect';
+import { postPacientesAction } from '../paciente.actions';
+import reducer from '../paciente.saga';
+import saga from '../paciente.saga';
+import { makeSelectPrimerNombre, makeSelectSegundoNombre } from '../paciente.selectors';
 
+const key = 'paciente';
 
-const IngresarPaciente = () => {
+function IngresarPaciente(props) {
+  useInjectReducer({ key, reducer });
+  useInjectSaga({ key, saga });
+
   const [form] = Form.useForm();
   const [formLayout, setFormLayout] = useState('horizontal');
   const [value, setValue] = useState({ short: 'HN' });
@@ -86,10 +99,29 @@ const IngresarPaciente = () => {
         <Switch defaultChecked onChange={onSwitchChange} />
       </Form.Item>
       <Form.Item {...buttonItemLayout}>
-        <Button type="primary">Enviar</Button>
+        <Button type="primary" onClick={props.postPaciente}>
+          Enviar
+        </Button>
       </Form.Item>
     </Form>
   );
 };
 
-export default IngresarPaciente;
+const mapStateToProps = createStructuredSelector({
+  primerNombre: makeSelectPrimerNombre(),
+  segundoNombre: makeSelectSegundoNombre(),
+});
+
+const mapDispatchToProps = dispatch => ({
+  postPaciente: () => dispatch(postPacientesAction())
+})
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+export default compose(
+  withConnect,
+  memo,
+)(IngresarPaciente);
