@@ -1,10 +1,19 @@
-import React, { useState, useMemo }  from 'react';
+import React, { useState, useMemo, memo }  from 'react';
 import Select from 'react-select';
 import { Form, Input, Radio } from 'antd';
 import { DatePicker } from 'antd';
 import countryList from 'react-select-country-list';
+import PropTypes from 'prop-types';
+import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
+import { connect } from 'react-redux';
+import { onChangePrimerNombreAction } from '../paciente.actions';
 
-const DatosGenerales = () => {
+import {
+  makeSelectPrimerNombre,
+} from '../paciente.selectors';
+
+function DatosGenerales(props) {
   function onChange(e) {
     console.log(`radio checked:${e.target.value}`);
   }
@@ -23,7 +32,7 @@ const DatosGenerales = () => {
     <>
       <Form.Item label="Datos Generales"></Form.Item>
       <Form.Item label="Primer nombre">
-        <Input placeholder="Primer nombre" />
+        <Input placeholder="Primer nombre" onChange={props.onChangePrimerNombre} value={props.primerNombre} />
       </Form.Item>
       <Form.Item label="Segundo nombre">
         <Input placeholder="Segundo nombre" />
@@ -56,4 +65,23 @@ const DatosGenerales = () => {
   );
 };
 
-export default DatosGenerales;
+const mapStateToProps = createStructuredSelector({
+  title: makeSelectPrimerNombre(),
+});
+DatosGenerales.prototypes = {
+  primerNombre: PropTypes.string,
+}
+
+const mapDispatchToProps = dispatch => ({
+  onChangePrimerNombre: e => dispatch(onChangePrimerNombreAction(e.target.value)),
+});
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+export default compose(
+  withConnect,
+  memo,
+)(DatosGenerales);
