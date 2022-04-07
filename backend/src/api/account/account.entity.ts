@@ -1,3 +1,4 @@
+import { Paciente } from 'api/paciente/paciente.entity';
 import { Post } from 'api/post/post.entity';
 import { Column, Entity, OneToMany } from 'typeorm';
 import { CommonEntity } from 'utils/entity';
@@ -18,4 +19,7 @@ export class Account extends CommonEntity {
 
   @OneToMany(type => Post, post => post.account)
   public posts: Post[];
+
+  @OneToMany(type => Paciente, paciente => paciente.account)
+  public pacientes: Paciente[];
 }

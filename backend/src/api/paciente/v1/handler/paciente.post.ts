@@ -1,3 +1,4 @@
+import { Account } from 'api/account/account.entity';
 import { Paciente } from 'api/paciente/paciente.entity';
 import { NextFunction, Request, Response } from 'express';
 import { getRepository } from 'typeorm';
@@ -13,6 +14,7 @@ export async function pacientePostHandler(req: Request, res: Response, next: Nex
     const newPaciente = getRepository(Paciente).create({
         primerNombre: body.primerNombre,
         segundoNombre: body.segundoNombre,
+        account: { id: req.user.id } as Account,
     });
     const paciente = await getRepository(Paciente).save(newPaciente);
 
